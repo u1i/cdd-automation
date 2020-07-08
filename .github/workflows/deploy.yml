@@ -22,7 +22,7 @@ jobs:
         --form 'organizationId=fbb774a0-b55e-4ec9-b098-d786dffef89f' \
         --form 'name=c5' \
         --form 'type=swagger' \
-        --form 'file=@google2.json'
+        --form 'file=@google.json'
 
     # Send Notification
     - name: Telegram Notification

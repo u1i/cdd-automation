@@ -39,6 +39,8 @@ jobs:
     - name: Deploy on Solace
       run: |
         cd openapi-asyncapi-tools
+        python3 -m venv $PWD
+        . ./bin/activate
         pip install .
 
     # Send Notification

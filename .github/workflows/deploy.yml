@@ -27,7 +27,7 @@ jobs:
     # Send Notification
     - name: Telegram Notification
       run: |
-        curl -X POST -H "Content-Type: application/json" -d '{"value1":"message","value2":"from","value3":"GitHub actions"}' https://maker.ifttt.com/trigger/test02/with/key/cwlBmjg4cNE8S66APBk6j
+        curl -X POST -H "Content-Type: application/json" -d '{"value1":"Axway Configuration deployed"}' https://maker.ifttt.com/trigger/test02/with/key/cwlBmjg4cNE8S66APBk6j
 
   deploy-solace:
     runs-on: ubuntu-latest
@@ -50,4 +50,4 @@ jobs:
     # Send Notification
     - name: Telegram Notification
       run: |
-        curl -X POST -H "Content-Type: application/json" -d '{"value1":"message","value2":"from","value3":"GitHub actions"}' https://maker.ifttt.com/trigger/test02/with/key/cwlBmjg4cNE8S66APBk6j
+        curl -X POST -H "Content-Type: application/json" -d '{"value1":"Solace Configuration Deployed"}' https://maker.ifttt.com/trigger/test02/with/key/cwlBmjg4cNE8S66APBk6j

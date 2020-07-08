@@ -34,12 +34,12 @@ jobs:
     steps:
     # Check-out repo
     - uses: actions/checkout@v2
+    - uses: actions/setup-python@v3
 
     # Deploy on Solace
     - name: Deploy on Solace
       run: |
         cd openapi-asyncapi-tools
-        apt-get install python3-venv
         python3 -m venv $PWD
         . ./bin/activate
         pip install .

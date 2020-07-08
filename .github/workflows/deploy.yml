@@ -41,8 +41,11 @@ jobs:
 
     # Deploy on Solace
     - name: Deploy on Solace
+      env:
+        SOLACE_TOKEN: ${{ secrets.SOLACE_TOKEN }}
       run: |
         echo SHELL $SHELL
+        echo TOKEN $SOLACE_TOKEN
         cd openapi-asyncapi-tools
         python3 -m venv $PWD
         . ./bin/activate

@@ -42,6 +42,7 @@ jobs:
     # Deploy on Solace
     - name: Deploy on Solace
       run: |
+        echo SHELL $SHELL
         cd openapi-asyncapi-tools
         python3 -m venv $PWD
         . ./bin/activate

@@ -18,13 +18,14 @@ jobs:
         AXWAY_HOST: ${{ secrets.AXWAY_HOST }}
         AXWAY_USER: ${{ secrets.AXWAY_USER }}
         AXWAY_PASSWORD: ${{ secrets.AXWAY_PASSWORD }}
+        AXWAY_ORGID: ${{ secrets.AXWAY_ORGID }}
       run: |
         curl -k --location --request POST "$AXWAY_HOST/api/portal/v1.3/apirepo/import" \
         --header 'Accept: application/json' \
         --header 'Content-Type: multipart/form-data' \
         -u $AXWAY_USER:$AXWAY_PASSWORD \
-        --form 'organizationId=fbb774a0-b55e-4ec9-b098-d786dffef89f' \
-        --form 'name=c5' \
+        --form "organizationId=$AXWAY_ORGID" \
+        --form 'name=googlepayments' \
         --form 'type=swagger' \
         --form 'file=@google.json'
 

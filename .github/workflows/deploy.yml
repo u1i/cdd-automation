@@ -6,14 +6,37 @@ on:
     branches: [ master ]
 
 jobs:
-  deploy-axway-solace:
+  deploy-axway:
     runs-on: ubuntu-latest
     steps:
     # Check-out repo
     - uses: actions/checkout@v2
 
-    # Deploy on Axway and Solace
-    - name: Deploy on Axway and Solace
+    # Deploy on Axway
+    - name: Deploy on Axway
+      run: |
+        curl -k --location --request POST 'https://xwaay.net?127.0.0.1:8075/api/portal/v1.3/apirepo/import' \
+        --header 'Accept: application/json' \
+        --header 'Content-Type: multipart/form-data' \
+        --header 'Authorization: Basic YXBpYWRtaW46QXh3YXkxMjM=' \
+        --form 'organizationId=fbb774a0-b55e-4ec9-b098-d786dffef89f' \
+        --form 'name=c5' \
+        --form 'type=swagger' \
+        --form 'file=@google.json'
+
+    # Send Notification
+    - name: Telegram Notification
+      run: |
+        curl -X POST -H "Content-Type: application/json" -d '{"value1":"message","value2":"from","value3":"GitHub actions"}' https://maker.ifttt.com/trigger/test02/with/key/cwlBmjg4cNE8S66APBk6j
+
+  deploy-solace:
+    runs-on: ubuntu-latest
+    steps:
+    # Check-out repo
+    - uses: actions/checkout@v2
+
+    # Deploy on Solace
+    - name: Deploy on Solace
       run: |
         curl -k --location --request POST 'https://xwaay.net?127.0.0.1:8075/api/portal/v1.3/apirepo/import' \
         --header 'Accept: application/json' \

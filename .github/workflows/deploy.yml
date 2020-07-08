@@ -14,11 +14,15 @@ jobs:
 
     # Deploy on Axway
     - name: Deploy on Axway
+      env:
+        AXWAY_HOST: ${{ secrets.AXWAY_HOST }}
+        AXWAY_USER: ${{ secrets.AXWAY_USER }}
+        AXWAY_PASSWORD: ${{ secrets.AXWAY_PASSWORD }}
       run: |
-        curl -k --location --request POST 'https://xwaay.net?127.0.0.1:8075/api/portal/v1.3/apirepo/import' \
+        curl -k --location --request POST "$AXWAY_HOST/api/portal/v1.3/apirepo/import" \
         --header 'Accept: application/json' \
         --header 'Content-Type: multipart/form-data' \
-        --header 'Authorization: Basic YXBpYWRtaW46QXh3YXkxMjM=' \
+        -u $AXWAY_USER:$AXWAY_PASSWORD \
         --form 'organizationId=fbb774a0-b55e-4ec9-b098-d786dffef89f' \
         --form 'name=c5' \
         --form 'type=swagger' \

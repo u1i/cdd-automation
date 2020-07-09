@@ -53,7 +53,7 @@ jobs:
         python3 -m venv $PWD
         . ./bin/activate
         pip install .
-        sep importOpenAPI ../google.json --domain=DOMAIN-$RANDOM --application=app$RANDOM --token=$SOLACE_TOKEN
+        sep importOpenAPI ../google.json --domain=PAYMENTS-$RANDOM --application=APIGATEWAY-$RANDOM --token=$SOLACE_TOKEN
 
     # Send Notification
     - name: Telegram Notification

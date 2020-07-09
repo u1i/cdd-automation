@@ -31,8 +31,10 @@ jobs:
 
     # Send Notification
     - name: Telegram Notification
+      env:
+        TELEGRAM_KEY: ${{ secrets.TELEGRAM_KEY }}
       run: |
-        curl -X POST -H "Content-Type: application/json" -d '{"value1":"Axway Configuration deployed"}' https://maker.ifttt.com/trigger/test02/with/key/cwlBmjg4cNE8S66APBk6j
+        curl -X POST -H "Content-Type: application/json" -d '{"value1":"Axway Configuration deployed"}' https://maker.ifttt.com/trigger/test02/with/key/$TELEGRAM_KEY
 
   deploy-solace:
     runs-on: ubuntu-latest
@@ -48,14 +50,21 @@ jobs:
     - name: Deploy on Solace
       env:
         SOLACE_TOKEN: ${{ secrets.SOLACE_TOKEN }}
+        SOLACE_HOST: ${{ secrets.SOLACE_HOST }}
+        SOLACE_ADMIN: ${{ secrets.SOLACE_ADMIN }}
+        SOLACE_PASSWORD: ${{ secrets.SOLACE_PASSWORD }}
+        SOLACE_VPN: ${{ secrets.SOLACE_VPN }}
+        SOLACE_QUEUE: ${{ secrets.SOLACE_QUEUE }}
       run: |
         cd openapi-asyncapi-tools
         python3 -m venv $PWD
         . ./bin/activate
         pip install .
         sep importOpenAPI ../google.json --pub --domain=PAYMENTS-$RANDOM --application=APIGATEWAY-$RANDOM --token=$SOLACE_TOKEN
-
+        sep createQueue api-samples/buy_order_v1_beta_oas3.json --host $SOLACE_HOST --admin-user $SOLACE_ADMIN --admin-password $SOLACE_PASSWORD --vpn $SOLACE_VPN --queue $SOLACE_QUEUE
     # Send Notification
     - name: Telegram Notification
+      env:
+        TELEGRAM_KEY: ${{ secrets.TELEGRAM_KEY }}
       run: |
-        curl -X POST -H "Content-Type: application/json" -d '{"value1":"Solace Configuration Deployed"}' https://maker.ifttt.com/trigger/test02/with/key/cwlBmjg4cNE8S66APBk6j
+        curl -X POST -H "Content-Type: application/json" -d '{"value1":"Solace Configuration Deployed"}' https://maker.ifttt.com/trigger/test02/with/key/$TELEGRAM_KEY
